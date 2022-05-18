@@ -2,7 +2,6 @@ FROM golang:latest
 
 RUN mkdir /build
 WORKDIR /build
-RUN chmod -R 777 /build/otpservice
 
 RUN export GO111MODULE=on
 RUN go get github.com/anandkedari/otpservice
