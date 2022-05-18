@@ -1,5 +1,4 @@
 package main
-
 import (
     "fmt"
     "log"
@@ -20,7 +19,6 @@ var Messages []Message
 func home(w http.ResponseWriter, r *http.Request){
     fmt.Fprintf(w, "OTP Service running")
 }
-
 
 func handleRequests() {
     myRouter := mux.NewRouter().StrictSlash(true)
@@ -45,16 +43,17 @@ func main() {
 }
 
 func addNewMessage(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Content-Type", "application/json")
     // get the body of our POST request
-    // return the string response containing the request body
     reqBody, _ := ioutil.ReadAll(r.Body)
     var message Message 
-    json.Unmarshal(reqBody, &message)
+    json.Unmarshal(reqBody, &message) //unmarshal and save request in message variable
 
+    //deletes existing object from Messages array before adding new object for specified mobile number
     deleteExistingMessage(message)
-    // update our global Messages array to include new Message
+
+    // Add new essage to Messages array
     Messages = append(Messages, message)
-    w.Header().Set("Content-Type", "application/json")
     json.NewEncoder(w).Encode(message)
 }
 
@@ -69,6 +68,7 @@ func deleteExistingMessage(mes Message) {
 }
 
 func deleteMessage(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Content-Type", "application/json")
     vars := mux.Vars(r)
     number := vars["SMSRecepientNumber"]
     fmt.Println("Endpoint Hit: deleteMessage from " + number)
@@ -80,11 +80,13 @@ func deleteMessage(w http.ResponseWriter, r *http.Request) {
 }
 
 func returnSMSBody(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Content-Type", "application/json")
 	fmt.Println("Endpoint Hit: returnSMSBody")
     	json.NewEncoder(w).Encode(Messages)
 }
 
 func returnSingleSMSBody(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Content-Type", "application/json")
     fmt.Println("Endpoint Hit: returnSingleSMSBody")
     vars := mux.Vars(r)
     key := vars["SMSRecepientNumber"]
@@ -95,4 +97,3 @@ func returnSingleSMSBody(w http.ResponseWriter, r *http.Request) {
         }
     }
 }
-
