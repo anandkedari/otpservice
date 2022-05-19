@@ -1,4 +1,4 @@
-gFROM golang:latest
+FROM golang:latest
 
 WORKDIR /go/src
 

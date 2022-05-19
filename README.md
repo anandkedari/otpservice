@@ -33,3 +33,27 @@ curl --location --request GET 'http://localhost:8000/sms/1234567890'
 curl --location --request DELETE 'http://localhost:8000/sms/1234567890' \
 --data-raw ''
 ```
+
+
+
+# Docker
+
+#Build Docker image
+```
+docker build -t otpservice . --no-cache
+```
+
+#List of Docker images
+```docker images
+```
+
+#Run Docker image
+```
+docker run -p 8000:8000 -tid otpservice
+```
+
+#Go inside docker container
+```
+docker ps
+docker exec -it <container id> bash
+```
