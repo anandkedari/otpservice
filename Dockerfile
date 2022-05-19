@@ -1,6 +1,7 @@
 FROM golang:latest
 
-WORKDIR /go/src
+RUN mkdir /goapp
+WORKDIR /goapp
 
 RUN export GO111MODULE=on
 RUN git clone https://github.com/anandkedari/otpservice.git
