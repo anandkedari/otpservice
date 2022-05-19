@@ -1,14 +1,12 @@
-FROM golang:latest
+gFROM golang:latest
 
-RUN mkdir /build
-WORKDIR /build
+WORKDIR /go/src
 
 RUN export GO111MODULE=on
-RUN go get github.com/anandkedari/otpservice
 RUN git clone https://github.com/anandkedari/otpservice.git
+RUN ls
+RUN cd otpservice && go build
 
-RUN cd /build/otpservice && go build
+EXPOSE 8000
 
-EXPOSE 8080
-
-ENTRYPOINT ["/build/otpservice"]
+ENTRYPOINT ["./otpservice/otpservice"]
