@@ -44,7 +44,8 @@ docker build -t otpservice . --no-cache
 ```
 
 #List of Docker images
-```docker images
+```
+docker images
 ```
 
 #Run Docker image
